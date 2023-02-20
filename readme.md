@@ -1,6 +1,6 @@
 # Swoole Http Example
 
-This application is a example using Swoole HTTP with PSRs 7, 11 for Http Requests, Responses and Controllers.
+This application is an example using Swoole HTTP with PSRs 7, 11 for Http Requests, Responses and Controllers.
 
 ## How to execute - local
 
@@ -38,7 +38,7 @@ Run:
 docker run  -p 80:9501 --name my_swoole_app myaccount/myapp_name:1.0.0
 ```
 
-Stop imagem local:
+Stop image locally:
 ```sh
 docker stop my_swoole_app
 ```
