@@ -1,0 +1,24 @@
+{
+    "name": "swoole/api",
+    "description": "API utilizando o swoole",
+    "autoload": {
+        "psr-4": {
+            "Api\\": "src/",
+            "Framework\\": "framework"
+        }
+    },
+    "authors": [
+        {
+            "name": "Renan Fortunato"
+        }
+    ],
+    "require": {
+        "psr/http-message": "^1.0",
+        "psr/http-factory": "^1.0",
+        "psr/http-server-handler": "^1.0",
+        "psr/container": "^2.0",
+        "psr/log": "^3.0",
+        "nyholm/psr7": "^1.5",
+        "nyholm/psr7-server": "^1.0"
+    }
+}

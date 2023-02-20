@@ -1,0 +1,15 @@
+vendor/
+.idea/
+.composer
+.docker
+.project
+composer.lock
+*.cache
+*.bak
+*.tmp
+./git
+.var/
+.vscode/
+.env
+.phpunit*
+test/reports

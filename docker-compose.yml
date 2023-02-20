@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+
+    app:
+        build: .
+        container_name: php_app_swoole_http
+        volumes:
+            - .:/var/www
+        networks:
+            - my_php_app
+        ports:
+            - "8089:8000"
+            - "8090:8001"
+            - "8091:9501"
+        depends_on:
+            - db
+            - redis
+        #command: php -S 0.0.0.0:8000 -t public/
+
+    # nginx:
+    #     build: .docker/nginx
+    #     container_name: nginx_app
+    #     restart: always
+    #     tty: true
+    #     ports:
+    #         - "8185:80"
+    #     volumes:
+    #         - .:/var/www
+    #     networks:
+    #         - my_php_app
+    #     depends_on:
+    #         - app
+
+    db:
+        platform: linux/x86_64 # Para funcionar no mac
+        build: ./.docker/mysql
+        container_name: mysql_app
+        restart: always
+        tty: true
+        ports:
+            - "3320:3306"
+        volumes:
+            - ./.docker/dbdata:/var/lib/mysql
+            - ./.docker/mysql:/docker-entrypoint-initdb.d
+        environment:
+            - MYSQL_DATABASE=app
+            - MYSQL_ROOT_PASSWORD=root
+        networks:
+            - my_php_app
+
+#    mongodb:
+#        platform: linux/x86_64 # Para funcionar no mac
+#        restart: always
+#        container_name: mongo_db_php
+#        image: mongo:6.0
+#        ports:
+#            - "27017:27017"
+#        environment:
+#            - MONGO_INITDB_DATABASE=app
+#            - MONGO_INITDB_ROOT_USERNAME=mongo_app
+#            - MONGO_INITDB_ROOT_PASSWORD=e296cd9f
+#        volumes:
+#            - ./.docker/data_mongo:/data/db
+#        networks:
+#            - my_php_app
+
+    redis:
+        image: redis:alpine
+        container_name: redis_app
+        networks:
+            - my_php_app
+
+networks:
+    my_php_app:
+        driver: bridge
